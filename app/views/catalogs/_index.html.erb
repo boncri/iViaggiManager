@@ -14,7 +14,7 @@
   <tbody>
   <% @catalogs.each do |catalog| %>
       <tr>
-        <td><%= link_to catalog.id, catalog_path(catalog) %></td>
+        <td><%= link_to catalog.id, tour_operator_catalog_path(catalog.tour_operator, catalog) %></td>
         <td><%= catalog.title %></td>
         <td><%= catalog.destination %></td>
         <td><%= catalog.url %></td>
@@ -22,9 +22,9 @@
         <td><%=l catalog.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_catalog_path(catalog), :class => 'btn btn-mini' %>
+                      edit_tour_operator_catalog_path(catalog.tour_operator, catalog), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      catalog_path(catalog),
+                      tour_operator_catalog_path(catalog.tour_operator, catalog),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-mini btn-danger' %>
@@ -33,3 +33,7 @@
   <% end %>
   </tbody>
 </table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_tour_operator_catalog_path(:tour_operator_id => params[:tour_operator_id]),
+            :class => 'btn btn-primary' %>

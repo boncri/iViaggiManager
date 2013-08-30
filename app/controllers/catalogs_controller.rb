@@ -4,11 +4,7 @@ class CatalogsController < ApplicationController
   # GET /catalogs
   # GET /catalogs.json
   def index
-    unless params.key?(:tour_operator_id)
-      @catalogs = Catalog.all
-    else
-      @catalogs = Catalog.where(:tour_operator_id => params[:tour_operator_id])
-    end
+    @catalogs = Catalog.where(:tour_operator_id => params[:tour_operator_id])
 
     respond_to do |format|
       format.html
@@ -24,7 +20,7 @@ class CatalogsController < ApplicationController
 
   # GET /catalogs/new
   def new
-    @catalog = Catalog.new
+    @catalog = Catalog.new(:tour_operator_id => params[:tour_operator_id])
   end
 
   # GET /catalogs/1/edit
@@ -38,7 +34,7 @@ class CatalogsController < ApplicationController
 
     respond_to do |format|
       if @catalog.save
-        format.html { redirect_to @catalog, notice: 'Catalog was successfully created.' }
+        format.html { redirect_to tour_operator_catalog_path(@catalog.tour_operator, @catalog), notice: 'Catalog was successfully created.' }
         format.json { render action: 'show', status: :created, location: @catalog }
       else
         format.html { render action: 'new' }
@@ -52,7 +48,7 @@ class CatalogsController < ApplicationController
   def update
     respond_to do |format|
       if @catalog.update(catalog_params)
-        format.html { redirect_to @catalog, notice: 'Catalog was successfully updated.' }
+        format.html { redirect_to tour_operator_catalog_path(@catalog.tour_operator, @catalog), notice: 'Catalog was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -66,7 +62,7 @@ class CatalogsController < ApplicationController
   def destroy
     @catalog.destroy
     respond_to do |format|
-      format.html { redirect_to catalogs_url }
+      format.html { redirect_to tour_operator_catalogs_url(@catalog.tour_operator) }
       format.json { head :no_content }
     end
   end
