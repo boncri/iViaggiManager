@@ -50,3 +50,5 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'paperclip'#, '~> 3.0'
+
+gem 'rails-i18n', '~> 4.0.0.pre'

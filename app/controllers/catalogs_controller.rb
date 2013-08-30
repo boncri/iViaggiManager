@@ -34,7 +34,7 @@ class CatalogsController < ApplicationController
 
     respond_to do |format|
       if @catalog.save
-        format.html { redirect_to tour_operator_catalog_path(@catalog.tour_operator, @catalog), notice: 'Catalog was successfully created.' }
+        format.html { redirect_to catalog_path(@catalog), notice: 'Catalog was successfully created.' }
         format.json { render action: 'show', status: :created, location: @catalog }
       else
         format.html { render action: 'new' }
@@ -48,7 +48,7 @@ class CatalogsController < ApplicationController
   def update
     respond_to do |format|
       if @catalog.update(catalog_params)
-        format.html { redirect_to tour_operator_catalog_path(@catalog.tour_operator, @catalog), notice: 'Catalog was successfully updated.' }
+        format.html { redirect_to catalog_path(@catalog), notice: 'Catalog was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

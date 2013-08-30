@@ -2,7 +2,7 @@ IViaggiManager::Application.routes.draw do
   #resources :catalogs
 
   resources :tour_operators do
-    resources :catalogs
+    resources :catalogs, :shallow => true
   end
 
   root 'tour_operators#index'
