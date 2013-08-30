@@ -1,0 +1,10 @@
+<%- model_class = Catalog -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<%= render :partial => 'index' %>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_catalog_path,
+            :class => 'btn btn-primary' %>

@@ -1,0 +1,35 @@
+<%- model_class = Catalog -%>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:id) %></th>
+    <th><%= model_class.human_attribute_name(:title) %></th>
+    <th><%= model_class.human_attribute_name(:destination) %></th>
+    <th><%= model_class.human_attribute_name(:url) %></th>
+    <th><%= model_class.human_attribute_name(:tour_operator_id) %></th>
+    <th><%= model_class.human_attribute_name(:created_at) %></th>
+    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @catalogs.each do |catalog| %>
+      <tr>
+        <td><%= link_to catalog.id, catalog_path(catalog) %></td>
+        <td><%= catalog.title %></td>
+        <td><%= catalog.destination %></td>
+        <td><%= catalog.url %></td>
+        <td><%= link_to catalog.tour_operator.name, tour_operator_path(catalog.tour_operator) %></td>
+        <td><%=l catalog.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_catalog_path(catalog), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      catalog_path(catalog),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
